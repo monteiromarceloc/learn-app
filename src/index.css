@@ -9,7 +9,20 @@ body {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  monospace;
+}
+
+input {
+  display: flex;
+  background-color: transparent;
+  border: none;
+  flex-direction: row;
+  flex: 1;
+  outline: none;
+  margin-left: 6px;
+
+  font-size: 20px;
+  color: #ccc;
 }
 
 .App {
@@ -29,4 +42,19 @@ code {
 
 .App-link {
   color: #61dafb;
+}
+
+.Search-box {
+  width: 50%;
+  max-width: 420px;
+  height: 42px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  padding: 4px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
 }
