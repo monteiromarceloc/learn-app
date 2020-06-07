@@ -25,10 +25,13 @@ export const ItemContainer = styled.button`
   box-sizing: border-box;
   background-color: #eee;
   border-radius: 16px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   
   display: flex;
   flex-direction: row;
+  @media (max-width: 630px) {
+    height: 100px;
+  }
   `
 
 export const ItemInfo = styled.div`
@@ -46,4 +49,27 @@ export const ItemImg = styled.img`
   object-fit: cover;
   border-bottom-left-radius: 16px;
   border-top-left-radius: 16px;
+  @media (max-width: 630px) {
+    height: 100px;
+    min-width: 100px;
+    width: 100px;
+  }
+`
+
+export const Label = styled.p`
+  background-color: transparent;
+  font-size: 16px;
+  color: #ccc;
+`
+
+export const ActionLabel = styled.button`
+  background-color: transparent;
+  font-size: 18px;
+  font-weight: bold;
+  color: #61dafb;
+  margin-top: 12px;
+`
+
+export const List = styled.div`
+  min-height: 80px;
 `
