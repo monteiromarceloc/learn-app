@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { MdSearch } from "react-icons/md";
-import firebase from '../../firebaseConfig'
+import { SearchBox } from './styles'
+import firebase from '../../services/firebaseConfig'
 import mockData from '../../mockData'
 
 interface IItem {
@@ -52,23 +53,18 @@ const Home: React.FC = () => {
   }
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <div className='Search-box'>
-          <MdSearch color='#ccc' />
-          <input
-            placeholder='O que você quer aprender?'
-            value={inputText}
-            onChange={handleChange}
-            onKeyDown={handleKeyDown}
-            autoFocus
-          />
-          <div>
-
-          </div>
-        </div>
-      </header>
-    </div>
+    <section>
+      <SearchBox>
+        <MdSearch color='#ccc' />
+        <input
+          placeholder='O que você quer aprender?'
+          value={inputText}
+          onChange={handleChange}
+          onKeyDown={handleKeyDown}
+          autoFocus
+        />
+      </SearchBox>
+    </section>
   );
 }
 
