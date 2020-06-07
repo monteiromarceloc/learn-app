@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { MdSearch } from "react-icons/md";
-import { SearchBox } from './styles'
-import firebase from '../../services/firebaseConfig'
+import { SearchBox, ItemContainer, ItemInfo, ItemImg } from './styles'
 import mockData from '../../mockData'
 
 interface IItem {
-  displayName: string;
+  title: string;
   linkUrl: string;
   imgUrl: string;
   description: string;
@@ -15,25 +14,6 @@ interface IItem {
 const Home: React.FC = () => {
   const [inputText, setInputText] = useState('')
   const [items, setItems] = useState<IItem[]>([])
-
-  useEffect(() => {
-    // fetchData();
-  }, [])
-
-  // const fetchData = () => {
-  //   try {
-  //     firebase.database().ref('data').once('value').then((snap: firebase.database.DataSnapshot) => {
-  //       const val = snap.val()
-  //       if (val) {
-  //         const result = Object.keys(val).map(key => ({ id: key, ...val[key] }));
-  //         setItems(result);
-  //         console.log(result)
-  //       }
-  //     })
-  //   } catch (err) {
-  //     console.log('Error at fetchData: ', err);
-  //   }
-  // }
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
@@ -46,7 +26,7 @@ const Home: React.FC = () => {
 
   const searchItems = () => {
     const result = mockData.filter((e: IItem) =>
-      e.displayName.toLowerCase().includes(inputText.toLowerCase()) ||
+      e.title.toLowerCase().includes(inputText.toLowerCase()) ||
       e.description.toLowerCase().includes(inputText.toLowerCase())
     )
     setItems(result)
@@ -64,6 +44,19 @@ const Home: React.FC = () => {
           autoFocus
         />
       </SearchBox>
+      <ul>
+        {
+          mockData.map(item => (
+            <ItemContainer>
+              <ItemImg src={item.imgUrl} />
+              <ItemInfo>
+                <h2>{item.title}</h2>
+                <p>{item.description}</p>
+              </ItemInfo>
+            </ItemContainer>
+          ))
+        }
+      </ul>
     </section>
   );
 }
