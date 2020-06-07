@@ -4,6 +4,8 @@ export default createGlobalStyle`
   * {
     margin: 0;
     padding: 0;
+    border: 0;
+    outline: none
   }
 
   body {
@@ -36,7 +38,6 @@ export default createGlobalStyle`
     border: none;
     flex-direction: row;
     flex: 1;
-    outline: none;
     margin-left: 6px;
     font-size: 20px;
     color: #ccc;
@@ -49,5 +50,9 @@ export default createGlobalStyle`
     font-size: 16px;
     text-align: justify;
     margin-top: 6px;
+  }
+
+  button {
+    cursor: pointer;
   }
 `

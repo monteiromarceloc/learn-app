@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import FlipMove from 'react-flip-move'
+
 import { MdSearch } from "react-icons/md";
 import { SearchBox, ItemContainer, ItemInfo, ItemImg } from './styles'
 import mockData from '../../mockData'
 
 interface IItem {
+  id: string;
   title: string;
   linkUrl: string;
   imgUrl: string;
@@ -13,7 +16,7 @@ interface IItem {
 
 const Home: React.FC = () => {
   const [inputText, setInputText] = useState('')
-  const [items, setItems] = useState<IItem[]>([])
+  const [filteredItems, setFilteredItems] = useState<IItem[]>([])
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
@@ -29,7 +32,11 @@ const Home: React.FC = () => {
       e.title.toLowerCase().includes(inputText.toLowerCase()) ||
       e.description.toLowerCase().includes(inputText.toLowerCase())
     )
-    setItems(result)
+    setFilteredItems(result)
+  }
+
+  const handleClick = (item: IItem) => () => {
+    window.open(item.linkUrl);
   }
 
   return (
@@ -44,19 +51,24 @@ const Home: React.FC = () => {
           autoFocus
         />
       </SearchBox>
-      <ul>
-        {
-          mockData.map(item => (
-            <ItemContainer>
-              <ItemImg src={item.imgUrl} />
-              <ItemInfo>
-                <h2>{item.title}</h2>
-                <p>{item.description}</p>
-              </ItemInfo>
-            </ItemContainer>
-          ))
-        }
-      </ul>
+      {
+        filteredItems.length > 0 &&
+        <ul>
+          <FlipMove duration={200} easing='ease-out'>
+            {
+              filteredItems.map(item => (
+                <ItemContainer onClick={handleClick(item)} key={item.id} >
+                  <ItemImg src={item.imgUrl} />
+                  <ItemInfo>
+                    <h2>{item.title}</h2>
+                    <p>{item.description}</p>
+                  </ItemInfo>
+                </ItemContainer>
+              ))
+            }
+          </FlipMove>
+        </ul>
+      }
     </section>
   );
 }

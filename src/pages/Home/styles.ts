@@ -17,7 +17,7 @@ export const SearchBox = styled.div`
   align-items: center;
 `
 
-export const ItemContainer = styled.div`
+export const ItemContainer = styled.button`
   width: 100%;
   max-width: 600px;
   min-width: 280px;
@@ -25,6 +25,7 @@ export const ItemContainer = styled.div`
   box-sizing: border-box;
   background-color: #eee;
   border-radius: 16px;
+  margin-bottom: 12px;
   
   display: flex;
   flex-direction: row;
@@ -40,7 +41,9 @@ export const ItemInfo = styled.div`
 
 export const ItemImg = styled.img`
   height: 120px;
+  min-width: 120px;
   width: 120px;
+  object-fit: cover;
   border-bottom-left-radius: 16px;
   border-top-left-radius: 16px;
 `
