@@ -12,18 +12,6 @@ code {
   monospace;
 }
 
-input {
-  display: flex;
-  background-color: transparent;
-  border: none;
-  flex-direction: row;
-  flex: 1;
-  outline: none;
-  margin-left: 6px;
-
-  font-size: 20px;
-  color: #ccc;
-}
 
 .App {
   text-align: center;
@@ -47,14 +35,28 @@ input {
 .Search-box {
   width: 50%;
   max-width: 420px;
+  min-width: 280px;
   height: 42px;
   box-sizing: border-box;
   border: 2px solid #ccc;
   border-radius: 4px;
   padding: 4px;
-
+  
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+}
+
+input {
+  display: flex;
+  background-color: transparent;
+  border: none;
+  flex-direction: row;
+  flex: 1;
+  outline: none;
+  margin-left: 6px;
+
+  font-size: 20px;
+  color: #ccc;
 }
