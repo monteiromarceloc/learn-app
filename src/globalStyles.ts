@@ -9,7 +9,7 @@ export default createGlobalStyle`
   }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    font-family: -apple-system, BlinkMacSystemFont, 'Roboto', 'Segoe UI', 'Oxygen',
       'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
       sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -20,7 +20,7 @@ export default createGlobalStyle`
     text-align: center;
     background-color: #282c34;
     min-height: 100vh;
-    padding: 40px 20px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -50,6 +50,10 @@ export default createGlobalStyle`
     font-size: 16px;
     text-align: justify;
     margin-top: 6px;
+    @media (max-width: 630px) {
+      font-size: 12px;
+    }
+    overflow: hidden;
   }
 
   button {
