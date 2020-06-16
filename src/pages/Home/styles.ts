@@ -8,7 +8,7 @@ export const SearchBox = styled.div`
   box-sizing: border-box;
   border: 2px solid #ccc;
   border-radius: 21px;
-  padding: 6px;
+  padding: 6px 10px;
   margin-bottom: 20px;
   
   display: flex;

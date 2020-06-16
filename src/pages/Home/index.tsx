@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FlipMove from 'react-flip-move'
+import firebase from '../../services/firebaseConfig';
 
 import { MdSearch } from "react-icons/md";
 import { SearchBox, ItemContainer, ItemInfo, ItemImg, ActionLabel, Label, List } from './styles'
-import mockData from '../../mockData'
 
 interface IItem {
   id: string;
@@ -18,6 +18,19 @@ const Home: React.FC = () => {
   const [inputText, setInputText] = useState('')
   const [filteredItems, setFilteredItems] = useState<IItem[]>([])
   const [noMatchesFound, setnoMatchesFound] = useState(false)
+  const [formatedData, setformatedData] = useState<IItem[]>([])
+
+  useEffect(() => {
+    firebase.database().ref('data').once('value').then(snap => {
+      formatData(Object.entries(snap.val()));
+    })
+  }, []);
+
+  const formatData = async (entries: any[]) => {
+    const allData = entries.map(e => ({ ...e[1], id: e[0] }));
+    console.log(allData);
+    setformatedData(allData);
+  }
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     const { value } = e.currentTarget;
@@ -29,7 +42,7 @@ const Home: React.FC = () => {
   }
 
   const searchItems = () => {
-    const result = mockData.filter((e: IItem) =>
+    const result = formatedData.filter((e: IItem) =>
       e.title.toLowerCase().includes(inputText.toLowerCase()) ||
       e.tags?.toLowerCase().includes(inputText.toLowerCase())
     )
@@ -42,7 +55,7 @@ const Home: React.FC = () => {
   }
 
   const handleShowMore = () => {
-    setFilteredItems(mockData);
+    setFilteredItems(formatedData);
     setInputText('');
     setnoMatchesFound(false);
   }
@@ -50,7 +63,6 @@ const Home: React.FC = () => {
   return (
     <section>
       <SearchBox>
-        <MdSearch color='#ccc' />
         <input
           placeholder='O que você quer aprender?'
           value={inputText}
@@ -58,24 +70,20 @@ const Home: React.FC = () => {
           onKeyDown={handleKeyDown}
           autoFocus
         />
+        <MdSearch color='#ccc' />
       </SearchBox>
 
       <List>
         {
-          filteredItems.length > 0 &&
-          <FlipMove duration={200} easing='ease-out'>
-            {
-              filteredItems.map(item => (
-                <ItemContainer onClick={handleClick(item)} key={item.id} >
-                  <ItemImg src={item.imgUrl} />
-                  <ItemInfo>
-                    <h2>{item.title}</h2>
-                    <p>{item.description}</p>
-                  </ItemInfo>
-                </ItemContainer>
-              ))
-            }
-          </FlipMove>
+          filteredItems?.map(item => (
+            <ItemContainer onClick={handleClick(item)} key={item.id} >
+              <ItemImg src={item.imgUrl} />
+              <ItemInfo>
+                <h2>{item.title}</h2>
+                <p>{item.description}</p>
+              </ItemInfo>
+            </ItemContainer>
+          ))
         }
       </List>
       {
@@ -84,6 +92,7 @@ const Home: React.FC = () => {
           <ActionLabel onClick={handleShowMore}>Ver lista completa</ActionLabel>
         </>
       }
+
     </section>
   );
 }

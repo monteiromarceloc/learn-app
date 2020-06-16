@@ -47,13 +47,12 @@ export default createGlobalStyle`
   }
 
   p {
-    font-size: 16px;
+    font-size: 14px;
     text-align: justify;
     margin-top: 6px;
     @media (max-width: 630px) {
-      font-size: 12px;
+      font-size: 11px;
     }
-    overflow: hidden;
   }
 
   button {
