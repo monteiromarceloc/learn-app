@@ -6,9 +6,9 @@ export const SearchBox = styled.div`
   min-width: 280px;
   height: 42px;
   box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 21px;
-  padding: 6px;
+  border: 2px solid #e8e8e8;
+  border-radius: 18px;
+  padding: 6px 10px 6px 16px;
   margin-bottom: 20px;
   
   display: flex;
@@ -21,55 +21,68 @@ export const ItemContainer = styled.button`
   width: 100%;
   max-width: 600px;
   min-width: 280px;
-  height: 120px;
+  height: 150px;
   box-sizing: border-box;
-  background-color: #eee;
-  border-radius: 16px;
-  margin-bottom: 14px;
+  background-color: #e8e8e8;
+  border-radius: 11px;
+  margin-bottom: 21px;
+  padding: 12px;
   
   display: flex;
   flex-direction: row;
-  @media (max-width: 630px) {
-    height: 100px;
-  }
-  `
+  align-items: flex-start;
+`
 
 export const ItemInfo = styled.div`
-  padding: 10px 20px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
-`
-
-export const ItemImg = styled.img`
-  height: 120px;
-  min-width: 120px;
-  width: 120px;
-  object-fit: cover;
-  border-bottom-left-radius: 16px;
-  border-top-left-radius: 16px;
-  @media (max-width: 630px) {
-    height: 100px;
-    min-width: 100px;
-    width: 100px;
+  margin-left: 20px;
+  h2 {
+    text-align: left;
+  }
+  p {
+    margin-top: 6px;
   }
 `
 
+export const ItemImg = styled.img`
+  height: 100%;
+  width: auto;
+  max-width: 120px;
+  max-width: 126px;
+  object-fit: cover;
+  /* border-radius: 2px; */
+`
+
 export const Label = styled.p`
-  background-color: transparent;
   font-size: 16px;
-  color: #ccc;
+  color: #e8e8e8;
 `
 
 export const ActionLabel = styled.button`
   background-color: transparent;
   font-size: 18px;
   font-weight: bold;
-  color: #61dafb;
+  color: #00BBB0;
   margin-top: 12px;
 `
 
 export const List = styled.div`
-  min-height: 80px;
+  min-height: 42px;
 `
+
+export const TagList = styled.div`
+  display: flex;
+  background-color: transparent;
+`
+
+export const Tag = styled.button`
+  background-color: #00BBB0;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 6px;
+  margin: 5px;
+`;
