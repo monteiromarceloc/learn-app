@@ -57,7 +57,6 @@ export const ItemImg = styled.img`
 `
 
 export const Label = styled.p`
-  background-color: transparent;
   font-size: 16px;
   color: #e8e8e8;
 `
@@ -71,7 +70,7 @@ export const ActionLabel = styled.button`
 `
 
 export const List = styled.div`
-  min-height: 80px;
+  min-height: 42px;
 `
 
 export const TagList = styled.div`
@@ -79,7 +78,11 @@ export const TagList = styled.div`
   background-color: transparent;
 `
 
-export const Tag = styled.div`
+export const Tag = styled.button`
   background-color: #00BBB0;
-  padding: 
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 6px;
+  margin: 5px;
 `;

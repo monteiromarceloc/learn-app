@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import firebase from '../../services/firebaseConfig';
 
 import { MdSearch } from "react-icons/md";
-import { SearchBox, ItemContainer, ItemInfo, ItemImg, ActionLabel, Label, List } from './styles'
+import { SearchBox, ItemContainer, ItemInfo, ItemImg, ActionLabel, Label, List, TagList, Tag } from './styles'
 
 interface IItem {
   id: string;
@@ -19,9 +19,16 @@ const Home: React.FC = () => {
   const [filteredItems, setFilteredItems] = useState<IItem[]>([])
   const [noMatchesFound, setnoMatchesFound] = useState(false)
 
+  const [suggestedTags, setSuggestedTags] = useState([])
+
   useEffect(() => {
     firebase.database().ref('data').once('value').then(snap => {
       formatData(Object.entries(snap.val()));
+    })
+    firebase.database().ref('tags').once('value').then(snap => {
+      const tags = snap.val().split(';').sort();
+      console.log(tags)
+      setSuggestedTags(tags);
     })
   }, []);
 
@@ -37,14 +44,15 @@ const Home: React.FC = () => {
   }
 
   const handleKeyDown = (e: any) => {
-    if (e.key === 'Enter') searchItems();
+    if (e.key === 'Enter') searchItems()();
   }
 
-  const searchItems = () => {
-    if (!inputText) return;
-
+  const searchItems = (textTag?: string) => () => {
+    if (!inputText && !textTag) return;
+    setnoMatchesFound(false);
     // ------- Single Word --------
-    const normalized = inputText.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    const normalized = (textTag || inputText).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    console.log(normalized)
     if (!normalized.includes(' ')) {
       const result = formatedData.filter((e: IItem) =>
         e.title.toLowerCase().includes(normalized) ||
@@ -86,14 +94,13 @@ const Home: React.FC = () => {
 
   }
 
-  const handleClick = (item: IItem) => () => {
+  const handleItemClick = (item: IItem) => () => {
     window.open(item.linkUrl);
   }
 
-  const handleShowMore = () => {
-    setFilteredItems(formatedData);
-    setInputText('');
-    setnoMatchesFound(false);
+  const handleTagClick = (text: string) => () => {
+    setInputText(text);
+    searchItems(text)();
   }
 
   return (
@@ -106,13 +113,13 @@ const Home: React.FC = () => {
           onKeyDown={handleKeyDown}
           autoFocus
         />
-        <MdSearch onClick={searchItems} color='#e8e8e8' />
+        <MdSearch onClick={searchItems()} color='#e8e8e8' />
       </SearchBox>
 
       <List>
         {
           filteredItems?.map(item => (
-            <ItemContainer onClick={handleClick(item)} key={item.id} >
+            <ItemContainer onClick={handleItemClick(item)} key={item.id} >
               <ItemImg src={item.imgUrl} />
               <ItemInfo>
                 <h2>{item.title}</h2>
@@ -124,9 +131,13 @@ const Home: React.FC = () => {
       </List>
       {
         noMatchesFound && <>
-          <Label>Não encontramos resultados :(</Label>
-          <ActionLabel onClick={handleShowMore}>Aqui estão algumas ideias:</ActionLabel>
-
+          <h4>Não encontramos resultados :(</h4>
+          <h3>Aqui estão algumas sugestões</h3>
+          <TagList>
+            {
+              suggestedTags?.map(tag => <Tag onClick={handleTagClick(tag)}>{tag}</Tag>)
+            }
+          </TagList>
         </>
       }
 

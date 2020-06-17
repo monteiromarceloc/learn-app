@@ -54,6 +54,19 @@ export default createGlobalStyle`
     }
   }
 
+  h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #00BBB0;
+    margin: 6px;
+  }
+
+  h4 {
+    font-size: 16px;
+    color: #e8e8e8;
+  }
+
+
   button {
     cursor: pointer;
   }
