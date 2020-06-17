@@ -6,9 +6,9 @@ export const SearchBox = styled.div`
   min-width: 280px;
   height: 42px;
   box-sizing: border-box;
-  border: 2px solid #ccc;
+  border: 2px solid #e8e8e8;
   border-radius: 21px;
-  padding: 6px 10px;
+  padding: 6px 10px 6px 16px;
   margin-bottom: 20px;
   
   display: flex;
@@ -23,7 +23,7 @@ export const ItemContainer = styled.button`
   min-width: 280px;
   height: 120px;
   box-sizing: border-box;
-  background-color: #eee;
+  background-color: #e8e8e8;
   border-radius: 16px;
   margin-bottom: 14px;
   
@@ -40,6 +40,9 @@ export const ItemInfo = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  p {
+    margin-top: 6px;
+  }
 `
 
 export const ItemImg = styled.img`
@@ -59,17 +62,27 @@ export const ItemImg = styled.img`
 export const Label = styled.p`
   background-color: transparent;
   font-size: 16px;
-  color: #ccc;
+  color: #e8e8e8;
 `
 
 export const ActionLabel = styled.button`
   background-color: transparent;
   font-size: 18px;
   font-weight: bold;
-  color: #61dafb;
+  color: #00BBB0;
   margin-top: 12px;
 `
 
 export const List = styled.div`
   min-height: 80px;
 `
+
+export const TagList = styled.div`
+  display: flex;
+  background-color: transparent;
+`
+
+export const Tag = styled.div`
+  background-color: #00BBB0;
+  padding: 
+`;

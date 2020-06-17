@@ -14,11 +14,12 @@ export default createGlobalStyle`
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: #1c1c1c;
   }
 
   section {
     text-align: center;
-    background-color: #282c34;
+    background-color: #1c1c1c;
     min-height: 100vh;
     padding: 20px;
     display: flex;
@@ -26,7 +27,7 @@ export default createGlobalStyle`
     align-items: center;
     justify-content: center;
     font-size: 22px;
-    color: #222;
+    color: #1c1c1c;
     @media (max-width: 630px) {
       font-size: 20px;
     }
@@ -38,9 +39,8 @@ export default createGlobalStyle`
     border: none;
     flex-direction: row;
     flex: 1;
-    margin-left: 6px;
     font-size: 20px;
-    color: #ccc;
+    color: #e8e8e8;
     @media (max-width: 630px) {
       font-size: 16px;
     }
@@ -49,7 +49,6 @@ export default createGlobalStyle`
   p {
     font-size: 14px;
     text-align: justify;
-    margin-top: 6px;
     @media (max-width: 630px) {
       font-size: 11px;
     }
