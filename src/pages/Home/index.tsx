@@ -27,14 +27,22 @@ const Home: React.FC = () => {
     })
     firebase.database().ref('tags').once('value').then(snap => {
       const tags = snap.val().split(';').sort();
-      console.log(tags)
       setSuggestedTags(tags);
     })
   }, []);
 
+  // const CrazyAdd = () => {
+  //   firebase.database().ref('data').push({
+  //     title: '',
+  //     description: '',
+  //     linkUrl: '',
+  //     imgUrl: '',
+  //     tags: '',
+  //   })
+  // }
+
   const formatData = async (entries: any[]) => {
     const allData = entries.map(e => ({ ...e[1], id: e[0] }));
-    console.log(allData);
     setformatedData(allData);
   }
 
@@ -52,7 +60,6 @@ const Home: React.FC = () => {
     setnoMatchesFound(false);
     // ------- Single Word --------
     const normalized = (textTag || inputText).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-    console.log(normalized)
     if (!normalized.includes(' ')) {
       const result = formatedData.filter((e: IItem) =>
         e.title.toLowerCase().includes(normalized) ||
@@ -60,11 +67,7 @@ const Home: React.FC = () => {
       )
       if (!result.length) {
         setnoMatchesFound(true);
-        firebase.database().ref('failedSearches').push({
-          inputText,
-          timestamp: Date.now(),
-          version: 1
-        });
+        firebase.database().ref('failedSearches').push(inputText);
       }
       setFilteredItems(result);
       return;
@@ -72,7 +75,6 @@ const Home: React.FC = () => {
 
     // ------- Multiple Word --------
     const arrayOfWords = normalized.split(' ');
-    console.log(arrayOfWords);
 
     arrayOfWords.forEach((word, index) => {
       const result = formatedData.filter((e: IItem) =>
@@ -132,7 +134,7 @@ const Home: React.FC = () => {
       {
         noMatchesFound && <>
           <h4>Não encontramos resultados :(</h4>
-          <h3>Aqui estão algumas sugestões</h3>
+          <h4>Aqui estão algumas sugestões:</h4>
           <TagList>
             {
               suggestedTags?.map(tag => <Tag onClick={handleTagClick(tag)}>{tag}</Tag>)
@@ -140,7 +142,7 @@ const Home: React.FC = () => {
           </TagList>
         </>
       }
-
+      {/* <button onClick={CrazyAdd}>Add</button> */}
     </section>
   );
 }

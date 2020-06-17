@@ -19,8 +19,6 @@ export const SearchBox = styled.div`
 
 export const ItemContainer = styled.button`
   width: 100%;
-  max-width: 600px;
-  min-width: 280px;
   height: 150px;
   box-sizing: border-box;
   background-color: #e8e8e8;
@@ -51,38 +49,30 @@ export const ItemImg = styled.img`
   height: 100%;
   width: auto;
   max-width: 120px;
-  max-width: 126px;
+  max-width: 33%;
   object-fit: cover;
-  /* border-radius: 2px; */
-`
-
-export const Label = styled.p`
-  font-size: 16px;
-  color: #e8e8e8;
-`
-
-export const ActionLabel = styled.button`
-  background-color: transparent;
-  font-size: 18px;
-  font-weight: bold;
-  color: #00BBB0;
-  margin-top: 12px;
 `
 
 export const List = styled.div`
-  min-height: 42px;
+  min-height: 30px;
+  max-width: 600px;
+  min-width: 280px;
 `
 
 export const TagList = styled.div`
   display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
   background-color: transparent;
+  max-width: 420px;
+  width: 88%;
 `
 
 export const Tag = styled.button`
   background-color: #00BBB0;
   color: #fff;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
-  padding: 6px;
+  padding: 8px;
   margin: 5px;
 `;
