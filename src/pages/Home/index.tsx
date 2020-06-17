@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import firebase from '../../services/firebaseConfig';
 
 import { MdSearch } from "react-icons/md";
-import { SearchBox, ItemContainer, ItemInfo, ItemImg, ActionLabel, Label, List, TagList, Tag } from './styles'
+import { SearchBox, ItemContainer, ItemInfo, ItemImg, List, TagList, Tag } from './styles'
 
 interface IItem {
   id: string;
