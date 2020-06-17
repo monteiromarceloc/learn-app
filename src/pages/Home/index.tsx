@@ -106,7 +106,7 @@ const Home: React.FC = () => {
           onKeyDown={handleKeyDown}
           autoFocus
         />
-        <MdSearch onClick={searchItems} color='#ccc' />
+        <MdSearch onClick={searchItems} color='#e8e8e8' />
       </SearchBox>
 
       <List>

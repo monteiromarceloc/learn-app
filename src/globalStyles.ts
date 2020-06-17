@@ -50,7 +50,7 @@ export default createGlobalStyle`
     font-size: 14px;
     text-align: justify;
     @media (max-width: 630px) {
-      font-size: 11px;
+      font-size: 12px;
     }
   }
 

@@ -7,7 +7,7 @@ export const SearchBox = styled.div`
   height: 42px;
   box-sizing: border-box;
   border: 2px solid #e8e8e8;
-  border-radius: 21px;
+  border-radius: 18px;
   padding: 6px 10px 6px 16px;
   margin-bottom: 20px;
   
@@ -21,42 +21,39 @@ export const ItemContainer = styled.button`
   width: 100%;
   max-width: 600px;
   min-width: 280px;
-  height: 120px;
+  height: 150px;
   box-sizing: border-box;
   background-color: #e8e8e8;
-  border-radius: 16px;
-  margin-bottom: 14px;
+  border-radius: 11px;
+  margin-bottom: 21px;
+  padding: 12px;
   
   display: flex;
   flex-direction: row;
-  @media (max-width: 630px) {
-    height: 100px;
-  }
-  `
+  align-items: flex-start;
+`
 
 export const ItemInfo = styled.div`
-  padding: 10px 20px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
+  margin-left: 20px;
+  h2 {
+    text-align: left;
+  }
   p {
     margin-top: 6px;
   }
 `
 
 export const ItemImg = styled.img`
-  height: 120px;
-  min-width: 120px;
-  width: 120px;
+  height: 100%;
+  width: auto;
+  max-width: 120px;
+  max-width: 126px;
   object-fit: cover;
-  border-bottom-left-radius: 16px;
-  border-top-left-radius: 16px;
-  @media (max-width: 630px) {
-    height: 100px;
-    min-width: 100px;
-    width: 100px;
-  }
+  /* border-radius: 2px; */
 `
 
 export const Label = styled.p`
