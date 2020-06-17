@@ -55,7 +55,7 @@ export default createGlobalStyle`
   }
 
   h3 {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     color: #00BBB0;
     margin: 6px;
@@ -64,6 +64,7 @@ export default createGlobalStyle`
   h4 {
     font-size: 16px;
     color: #e8e8e8;
+    margin-bottom: 10px;
   }
 
 
