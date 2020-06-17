@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import FlipMove from 'react-flip-move'
 import firebase from '../../services/firebaseConfig';
 
 import { MdSearch } from "react-icons/md";
@@ -16,9 +15,9 @@ interface IItem {
 
 const Home: React.FC = () => {
   const [inputText, setInputText] = useState('')
+  const [formatedData, setformatedData] = useState<IItem[]>([])
   const [filteredItems, setFilteredItems] = useState<IItem[]>([])
   const [noMatchesFound, setnoMatchesFound] = useState(false)
-  const [formatedData, setformatedData] = useState<IItem[]>([])
 
   useEffect(() => {
     firebase.database().ref('data').once('value').then(snap => {
@@ -42,12 +41,49 @@ const Home: React.FC = () => {
   }
 
   const searchItems = () => {
-    const result = formatedData.filter((e: IItem) =>
-      e.title.toLowerCase().includes(inputText.toLowerCase()) ||
-      e.tags?.toLowerCase().includes(inputText.toLowerCase())
-    )
-    if (!result.length) setnoMatchesFound(true);
-    setFilteredItems(result)
+    if (!inputText) return;
+
+    // ------- Single Word --------
+    const normalized = inputText.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    if (!normalized.includes(' ')) {
+      const result = formatedData.filter((e: IItem) =>
+        e.title.toLowerCase().includes(normalized) ||
+        e.tags?.toLowerCase().includes(normalized)
+      )
+      if (!result.length) {
+        setnoMatchesFound(true);
+        firebase.database().ref('failedSearches').push({
+          inputText,
+          timestamp: Date.now(),
+          version: 1
+        });
+      }
+      setFilteredItems(result);
+      return;
+    }
+
+    // ------- Multiple Word --------
+    const arrayOfWords = normalized.split(' ');
+    console.log(arrayOfWords);
+
+    arrayOfWords.forEach((word, index) => {
+      const result = formatedData.filter((e: IItem) =>
+        e.title.toLowerCase().includes(word) ||
+        e.tags?.toLowerCase().includes(word)
+      )
+
+      if (result.length) {
+        setFilteredItems(result);
+        return;
+      }
+
+      if (index === arrayOfWords.length - 1 && !result.length) {
+        setFilteredItems([]);
+        setnoMatchesFound(true);
+        firebase.database().ref('failedSearches').push(inputText);
+      }
+    })
+
   }
 
   const handleClick = (item: IItem) => () => {
@@ -70,7 +106,7 @@ const Home: React.FC = () => {
           onKeyDown={handleKeyDown}
           autoFocus
         />
-        <MdSearch color='#ccc' />
+        <MdSearch onClick={searchItems} color='#ccc' />
       </SearchBox>
 
       <List>
@@ -89,7 +125,8 @@ const Home: React.FC = () => {
       {
         noMatchesFound && <>
           <Label>Não encontramos resultados :(</Label>
-          <ActionLabel onClick={handleShowMore}>Ver lista completa</ActionLabel>
+          <ActionLabel onClick={handleShowMore}>Aqui estão algumas ideias:</ActionLabel>
+
         </>
       }
 
